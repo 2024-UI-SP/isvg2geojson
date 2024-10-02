@@ -2,12 +2,14 @@
 const fs = require('fs');
 const { geoFromSVGFile, svg2geojsonVersion } = require('../lib/svg2geojson.js');
 const args = require('minimist')(process.argv.slice(2), {
-	alias:  {l:'layers',t:'tolerance',o:'stdout',d:'debug',v:'version',h:'help',m:['minimal','min'],p:['precision','decimals']},
-	boolean:['l','o','d','v','m'],
+	alias:  {l:'layers',t:'tolerance',o:'stdout',d:'debug',v:'version',h:'help',m:['minimal','min'],p:['precision','decimals'], i:['image']},
+	boolean:['l','o','d','v','m','i'],
 	string: ['t','p'],
 	default:{t:0.1, p:6}
 });
 const { neatJSON } = require('neatjson');
+
+console.log('args:', args);
 
 const usage = `
 Usage: svg2geojson [options] file.svg
@@ -21,6 +23,7 @@ Options:
  -d, --debug         Include ids for each SVG element in the features. (default: no properties)
  -v, --version       Output the version of svg2geojson as the first line on stdout (${svg2geojsonVersion}).
  -h, --help          Show this help message.
+ -i, --image         Flip the Y axis to use with Leaflet. (default: false)
 `.trim();
 
 const originalFile = args._[0];
@@ -31,7 +34,8 @@ if (!originalFile) process.exit( args.version ? 0 : console.log(usage) || 1);
 const options = {
 	layers:    args.layers,
 	debug:     args.debug,
-	tolerance: args.tolerance
+	tolerance: args.tolerance,
+	image:     args.image // RLP: Added image option
 };
 
 const jsonOpts = args.minimal ?
