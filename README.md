@@ -1,4 +1,60 @@
-# SVG 2 GeoJSON
+# isvg2geojson
+
+Converts an SVG file with added geo-referencing tags into a GeoJSON file. It filps the latitude coordiantes so that the GeoJSON output file can be loaded into Leaflet map.
+
+The program is a small modification of [Phrognoz's svg2geojson program](https://github.com/Phrogz/svg2geojson).
+
+## Installing
+
+Clone this repository. See the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) documentation.
+
+## Geo-Reference Tags
+You still must still add `GeoItems` inside a Prognoz `MetaInfo` element as a direct child of the `<svg>` element.
+
+~~~xml
+<MetaInfo xmlns="http://www.prognoz.ru"><Geo>
+  <GeoItem X="0" Y="0" Latitude="0" Longitude="0"/>
+    <GeoItem X="2292" Y="2480" Latitude="2480" Longitude="2292"/>
+</Geo></MetaInfo>
+~~~
+
+where `2292` is the image width and `2480` is the image height. See Phrognoz's documentation below. 
+
+## Usage
+
+At the top of the repository folder, run the binary in a bash terminal:
+
+~~~
+$ ./bin/isvg2geojson -i  file.svg             # Writes file.geojson
+~~~
+
+Note the preceeding 'i' in 'isvg2geojson' and the `-i` option.
+
+All the options:
+
+~~~
+ -t, --tolerance=0.1 Distance (world meters) to sample curves to. (default: 0.1)
+ -l, --layers        Split top-level groups into separate files. (default: one file)
+ -o, --stdout        Output GeoJSON to stdout. (default: write files with names based on the SVG/layer)
+ -m, --minimal       Make the GeoJSON as small as possible (not pretty).
+ -p, --precision     Number of decimal places to format JSON numbers to. (default:6, as GeoJSON recommends)
+ -d, --debug         Include ids for each SVG element in the features. (default: no properties)
+ -v, --version       Output the version of svg2geojson as the first line on stdout (0.7.2).
+ -h, --help          Show this help message.
+ -i, --image         Flip the Y axis to use with Leaflet. (default: false)
+~~~
+
+When working with image overlay maps, I reccommend using high 'tolerance' and low 'precision', such as
+
+~~~
+$ ./bin/isvg2geojson -t=10000 -p=2 -i file.svg
+~~~
+
+This will make a reasonable sized output file with sufficient accurarcy to use in Leaflet image overlay maps. 
+
+I also reccomend not minimizing the file using the 'minimal' option if you want to edit the GeoJSON file.
+
+# Orignal SVG 2 GeoJSON
 
 Converts an SVG file with added geo-referencing tags into one or more GeoJSON files.
 
@@ -6,7 +62,6 @@ Converts an SVG file with added geo-referencing tags into one or more GeoJSON fi
 ## Installing
 
 `npm install svg2geojson`
-
 
 ## Geo-Referencing Tags
 
@@ -20,7 +75,6 @@ You must place two `GeoItems` inside a [Prognoz MetaInfo](http://help.prognoz.co
 ~~~
 
 These map opposing X/Y corners in your SVG coordinate space to Longitude/Latitude coordinates on the world. _Note that the SVG coordinate space has Y increasing down (toward the south), while Latitude increases upwards (towards the north)._
-
 
 ## Usage
 
