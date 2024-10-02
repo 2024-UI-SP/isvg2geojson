@@ -44,7 +44,7 @@ All the options:
  -i, --image         Flip the Y axis to use with Leaflet. (default: false)
 ~~~
 
-When working with image overlay maps, I reccommend using high 'tolerance' and low 'precision', such as
+When working with image overlay maps, I reccommend using high `tolerance` and low `precision`, such as
 
 ~~~
 $ ./bin/isvg2geojson -t=10000 -p=2 -i file.svg
@@ -52,7 +52,7 @@ $ ./bin/isvg2geojson -t=10000 -p=2 -i file.svg
 
 This will make a reasonable sized output file with sufficient accurarcy to use in Leaflet image overlay maps. 
 
-I also reccomend not minimizing the file using the 'minimal' option if you want to edit the GeoJSON file.
+I also reccomend not minimizing the file using the `minimal` option if you want to edit the GeoJSON file.
 
 # Orignal SVG 2 GeoJSON
 
