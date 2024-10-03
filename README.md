@@ -50,18 +50,16 @@ When working with image overlay maps, I reccommend using high `tolerance` and lo
 $ ./bin/isvg2geojson -t=10000 -p=2 -i file.svg
 ~~~
 
-This will make a reasonable sized output file with sufficient accurarcy to use in Leaflet image overlay maps. 
+This will make a reasonablely sized output file with sufficient accurarcy to use in Leaflet image overlay maps. 
 
 I also reccomend not minimizing the file using the `minimal` option if you want to edit the GeoJSON file.
 
-# Orignal SVG 2 GeoJSON
+# Phrognoz's SVG 2 GeoJSON
 
 Converts an SVG file with added geo-referencing tags into one or more GeoJSON files.
 
 
 ## Installing
-
-`npm install svg2geojson`
 
 ## Geo-Referencing Tags
 

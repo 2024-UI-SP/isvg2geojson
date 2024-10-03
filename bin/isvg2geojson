@@ -9,8 +9,6 @@ const args = require('minimist')(process.argv.slice(2), {
 });
 const { neatJSON } = require('neatjson');
 
-console.log('args:', args);
-
 const usage = `
 Usage: svg2geojson [options] file.svg
 
