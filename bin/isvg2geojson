@@ -24,7 +24,7 @@ Options:
  -i, --image         Flip the Y axis to use with Leaflet. (default: false)
 `.trim();
 
-const originalFile = args._[0];
+const originalFile = args._[0];git
 if (args.version) console.log(svg2geojsonVersion);
 if (args.help) process.exit(console.log(usage));
 if (!originalFile) process.exit( args.version ? 0 : console.log(usage) || 1);
